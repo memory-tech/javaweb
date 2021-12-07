@@ -8,8 +8,22 @@ package com.example.web.domain;
 public class User {
 
     private int id;
+    private String no;
     private String username;
+    private String department;
+    private String sex;
+    private String phone;
     private String password;
+
+    /*public User(int id, String no, String username, String department, String sex, String phone, String password) {
+        this.id = id;
+        this.no = no;
+        this.username = username;
+        this.department = department;
+        this.sex = sex;
+        this.phone = phone;
+        this.password = password;
+    }*/
 
     public int getId() {
         return id;
@@ -17,6 +31,38 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getNo() {
+        return no;
+    }
+
+    public void setNo(String no) {
+        this.no = no;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getUsername() {

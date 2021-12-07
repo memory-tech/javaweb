@@ -12,7 +12,7 @@ public enum Message {
     DOT_NO_ID(2, "请不要传入ID，作为参数！"),
     NAME_TOO_LONG(1, "名字太长了！"),
     NO_ID(3, "缺少Id参数！"),
-    USER_ERR_PASS(9, "用户或密码错误！"),
+    USER_ERR_PASS(9, "用户名或密码错误！"),
     USER_IS_EXIST(12,"用户已注册！"),
     FILE_UPLOAD_ERROR(13,"文件上传失败！"),
     EMPLOY_IN_JOB(14,"该员工不属于本公司且处于在职状态，不可查询"),

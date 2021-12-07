@@ -7,11 +7,11 @@ import com.example.web.mapper.UserMapper;
 import com.example.web.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -21,75 +21,44 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/user")
+@SessionAttributes(value = {"no"})
 public class UserController {
     @Autowired
     private UserMapper userMapper;
 
     /**
-     *查找所有员工信息
+     * 登录
+     * @param no
+     * @param password
      * @return
      */
-    @RequestMapping(value = "/findAll",method = RequestMethod.GET)
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
     @ResponseBody
-    public Result findAll(){
-        List<User> users = userMapper.findAll();
-        return ResultUtils.success(users);
+    public Result login(String no, String password, Model model){
+        User user=userMapper.findByNo(no);
+        if(user==null||!user.getPassword().equals(password)){
+            return ResultUtils.error(Message.USER_ERR_PASS);
+        }
+        model.addAttribute("no",no);
+        return ResultUtils.success("登录成功");
     }
 
     /**
-     *添加一个员工
-     * @param user
+     * 修改登录密码
+     * @param no
+     * @param password
      * @return
      */
-    @RequestMapping(value = "/addOne",method = RequestMethod.GET)
+    @RequestMapping(value = "/editPassword",method = RequestMethod.GET)
     @ResponseBody
-    public Result addOne(User user){
-        userMapper.addOne(user);
-        return ResultUtils.success(user.getId());
-    }
-
-    /**
-     * 根据id查询员工信息
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/findById",method = RequestMethod.GET)
-    @ResponseBody
-    public Result findById(int id){
-        User user=userMapper.findById(id);
-        return ResultUtils.success(user);
-    }
-
-    /**
-     * 删除一个员工信息
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "deleteOne",method = RequestMethod.GET)
-    @ResponseBody
-    public Result deleteOne(int id){
-        User user= userMapper.findById(id);
+    public Result editPassword(String no,String password){
+        User user=userMapper.findByNo(no);
         if(user==null){
             return ResultUtils.error(Message.USER_NOT_EXIST);
         }
-        userMapper.deleteOne(id);
-        return ResultUtils.success();
-    }
-
-    /**
-     * 更新员工信息
-     * @param user
-     * @return
-     */
-    @RequestMapping(value = "updateOne",method=RequestMethod.GET)
-    @ResponseBody
-    public Result updateOne(User user){
-        User user0= userMapper.findById(user.getId());
-        if(user0==null){
-            return ResultUtils.error(Message.USER_NOT_EXIST);
-        }
+        user.setPassword(password);
         userMapper.updateOne(user);
-        return ResultUtils.success(user.getId());
+        return ResultUtils.success("密码修改成功");
     }
 }
 
