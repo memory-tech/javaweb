@@ -2,7 +2,64 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.web.mapper.UserAttendanceMapper">
-    <select id="find" parameterType="userAttendance" resultType="userAttendance">
-
+    <!--查询全部考勤情况-->
+    <select id="findAll" parameterType="userAttendance" resultType="userAttendance">
+        select * from userAttendance
     </select>
+    <!--根据个人no查询考勤情况-->
+    <select id="findByNo" parameterType="string" resultType="userAttendance">
+        select * from userAttendance where no=#{no}
+    </select>
+
+    <!--员工查找自己的缺卡情况-->
+    <select id="findDisAttend" parameterType="string" resultType="userAttendance">
+        select * from userAttendance where no=#{no} and state='缺卡'
+    </select>
+    <!--根据个人username查询考勤情况-->
+    <select id="findByName" parameterType="string" resultType="userAttendance">
+        select * from userAttendance where username=#{username}
+    </select>
+
+    <!--根据日期和no查询今天是否打过卡-->
+    <select id="findByNoAndDate" parameterType="userAttendance" resultType="userAttendance">
+        select * from userAttendance where no=#{no} and date=#{date}
+    </select>
+    <!--签到-->
+    <insert id="checkIn" parameterType="userAttendance" useGeneratedKeys="true" keyProperty="id">
+        insert into userAttendance(date,no,username,department,begin,state)
+                        value(#{date},#{no},#{username},#{department},#{begin},#{state})
+    </insert>
+
+    <!--签退-->
+    <update id="checkOut" parameterType="userAttendance" useGeneratedKeys="true">
+        update userAttendance
+        <set>
+            <if test="username != null">username=#{username},</if>
+            <if test="date != null">date=#{date},</if>
+            <if test="no != null">no=#{no},</if>
+            <if test="department != null">department=#{department},</if>
+            <if test="begin != null">begin=#{begin},</if>
+            <if test="end != null">end=#{end},</if>
+            <if test="state != null">state=#{state}</if>
+        </set>
+    </update>
+
+    <!--修改出勤情况-->
+    <update id="update" parameterType="userAttendance" useGeneratedKeys="true">
+        update userAttendance
+        <set>
+            <if test="username != null">username=#{username},</if>
+            <if test="date != null">date=#{date},</if>
+            <if test="no != null">no=#{no},</if>
+            <if test="department != null">department=#{department},</if>
+            <if test="begin != null">begin=#{begin},</if>
+            <if test="end != null">end=#{end},</if>
+            <if test="state != null">state=#{state}</if>
+        </set>
+    </update>
+
+    <!--删除一个考勤-->
+    <delete id="delete" parameterType="userAttendance">
+        delete from userAttendance where no=#{no} and date=#{date}
+    </delete>
 </mapper>

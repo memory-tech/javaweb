@@ -7,18 +7,13 @@ package com.example.web.domain;
  */
 public class UserAttendance {
     private int id;
-    private String no;
-    private String username;
-    private String begin;
-    private String end;
-
-    public UserAttendance(int id, String no, String username, String begin, String end) {
-        this.id = id;
-        this.no = no;
-        this.username = username;
-        this.begin = begin;
-        this.end = end;
-    }
+    private String date;     //日期
+    private String no;      //编号
+    private String username;        //名字
+    private String department;      //部门
+    private String begin;      //签到时间
+    private String end;        //签退时间
+    private String state;      //考勤状态（分为正常、缺卡、旷工）
 
     public int getId() {
         return id;
@@ -26,6 +21,14 @@ public class UserAttendance {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getNo() {
@@ -44,6 +47,14 @@ public class UserAttendance {
         this.username = username;
     }
 
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
     public String getBegin() {
         return begin;
     }
@@ -58,5 +69,13 @@ public class UserAttendance {
 
     public void setEnd(String end) {
         this.end = end;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

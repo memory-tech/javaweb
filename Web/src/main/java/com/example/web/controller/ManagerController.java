@@ -2,11 +2,14 @@ package com.example.web.controller;
 
 import com.example.web.domain.Result;
 import com.example.web.domain.User;
+import com.example.web.domain.UserAttendance;
 import com.example.web.enm.Message;
+import com.example.web.mapper.UserAttendanceMapper;
 import com.example.web.mapper.UserMapper;
 import com.example.web.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -143,4 +146,5 @@ public class ManagerController {
         userMapper.updateOne(user);
         return ResultUtils.success("员工编号"+user.getNo()+"修改成功");
     }
+
 }
