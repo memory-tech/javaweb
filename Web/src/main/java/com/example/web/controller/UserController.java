@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/user")
-@SessionAttributes(value = {"no"})
+//@SessionAttributes(value = {"no"})
 public class UserController {
     @Autowired
     private UserMapper userMapper;
@@ -39,7 +39,7 @@ public class UserController {
         if(user==null||!user.getPassword().equals(password)){
             return ResultUtils.error(Message.USER_ERR_PASS);
         }
-        model.addAttribute("no",no);
+        //model.addAttribute("no",no);
         return ResultUtils.success("登录成功");
     }
 
