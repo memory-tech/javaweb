@@ -42,7 +42,6 @@
             <if test="end != null">end=#{end},</if>
             <if test="state != null">state=#{state}</if>
         </set>
-        where no=#{no} and date=#{date}
     </update>
 
     <!--修改出勤情况-->
@@ -57,7 +56,6 @@
             <if test="end != null">end=#{end},</if>
             <if test="state != null">state=#{state}</if>
         </set>
-        where no=#{no} and date=#{date}
     </update>
 
     <!--删除一个考勤-->

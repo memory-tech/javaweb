@@ -29,7 +29,7 @@
 
     <!--根据no删除员工-->
     <delete id="deleteByNo" parameterType="string">
-        delete from user where no =#{no}
+        delete from user where no like #{no}
     </delete>
     <!--更新员工信息-->
     <update id="updateOne" parameterType="user" useGeneratedKeys="true">
@@ -42,6 +42,5 @@
             <if test="sex != null">sex=#{sex},</if>
             <if test="phone != null">phone=#{phone}</if>
         </set>
-        where no=#{no}
     </update>
 </mapper>
