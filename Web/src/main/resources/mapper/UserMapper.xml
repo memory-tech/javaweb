@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.web.mapper.UserMapper">
+
+    <!--查询全体员工基本信息-->
+    <select id="findAll" resultType="user">
+        select * from user
+    </select>
+
+    <!--新增员工-->
+    <insert id="addOne" parameterType="user" useGeneratedKeys="true" keyProperty="id">
+        insert into user(no,username,password,department,sex,phone)
+                                    value(#{no},#{username},#{password},#{department},#{sex},#{phone});
+    </insert>
+
+    <!--根据id查找员工-->
+    <select id="findById" parameterType="int" resultType="user">
+        select * from user where id=#{id}
+    </select>
+    <!--根据no查找员工-->
+    <select id="findByNo" parameterType="string" resultType="user">
+        select * from user where no like #{no}
+    </select>
+    <!--根据id删除一个员工信息-->
+    <delete id="deleteOne" parameterType="int">
+        delete from user where id=#{id}
+    </delete>
+
+    <!--根据no删除员工-->
+    <delete id="deleteByNo" parameterType="string">
+        delete from user where no =#{no}
+    </delete>
+    <!--更新员工信息-->
+    <update id="updateOne" parameterType="user" useGeneratedKeys="true">
+        update user
+        <set>
+            <if test="username != null">username=#{username},</if>
+            <if test="password != null">password=#{password},</if>
+            <if test="no != null">no=#{no},</if>
+            <if test="department != null">department=#{department},</if>
+            <if test="sex != null">sex=#{sex},</if>
+            <if test="phone != null">phone=#{phone}</if>
+        </set>
+        where no=#{no}
+    </update>
+
+    <select id="findSex" parameterType="string" resultType="int">
+        select count(*) from user where sex=#{sex}
+    </select>
+</mapper>

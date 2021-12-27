@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.web.mapper.ApplicationMapper">
+
+    <insert id="add" parameterType="application" useGeneratedKeys="true" keyProperty="id">
+        insert into application(no,date,reason)value(#{no},#{date},#{reason})
+    </insert>
+
+    <select id="findByNoAndDate" parameterType="application" resultType="application">
+        select * from application where no=#{no} and date=#{date}
+    </select>
+
+    <select id="findAll" resultType="application">
+        select * from application
+    </select>
+
+    <delete id="delete" parameterType="application">
+        delete
+        from application
+        where no=#{no} and date=#{date}
+    </delete>
+</mapper>
